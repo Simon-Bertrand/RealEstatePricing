@@ -2,3 +2,4 @@ pandas
 numpy
 scikit-image
 notebook
+plotly
