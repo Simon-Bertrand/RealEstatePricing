@@ -3,15 +3,15 @@ import plotly.express as px
 import plotly.graph_objects as go
 import numpy as np
 
-def showDistribPlot(pdData,column,c='property_type'):
-    fig = px.scatter(pdData, x=np.arange(0,len(pdData.index),1), y=column,title = column,color = c)
+def showDistribPlot(pdData,column,c='property_type',**args):
+    fig = px.scatter(pdData, x=np.arange(0,len(pdData.index),1), y=column,title = column,color = c,**args)
     fig.show()
 
-def histogram(pdData,column,nb=100):
+def histogram(pdData,column,nb=100,**args):
     if pdData[column].dtype == 'O':
-        fig = px.histogram(pdData, x=column,nbins = nb,title='Histogram of '+column,color=column)
+        fig = px.histogram(pdData, x=column,nbins = nb,title='Histogram of '+column,color=column,**args)
     else:
-        fig = px.histogram(pdData, x=column,nbins = nb,title='Histogram of '+column)
+        fig = px.histogram(pdData, x=column,nbins = nb,title='Histogram of '+column,**args)
     fig.update_layout(bargap=0.2)
     fig.show()
 
