@@ -3,3 +3,4 @@ numpy
 scikit-image
 notebook
 plotly
+scipy

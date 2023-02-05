@@ -1,0 +1,51 @@
+﻿city;price m2;approximate_latitude;approximate_longitude
+paris;10570;48.86;2.35
+lyon;5987;45.75;4.85
+villeurbanne;4523;45.77;4.88
+nantes;4439;47.22;-1.55
+rennes;4489;48.08;-1.68
+toulouse;3933;43.6;1.44
+marseille;3721;43.3;5.37
+montpellier;3620;43.61;3.88
+toulon;3336;43.13;5.92
+grenoble;3075;45.19;5.72
+strasbourg;3458;48.58;7.74
+lille;3283;50.64;3.06
+bordeaux;3822;44.84;-0.58
+angers;2992;47.46;-0.55
+dijon;2653;47.32;5.04
+nîmes;2320;43.84;4.36
+le-havre;2162;49.49;0.11
+saint-étienne;1496;45.44;4.39
+toulouse;3615;43.6;1.44
+cannes;5366;43.55;7.02
+aix-en-provence;5437;43.53;5.45
+neuilly-sur-seine;11271;48.88;2.26
+antibes;5234;43.59;7.12
+perpignan;1556;42.7;2.9
+saint-raphael;4591;43.44;6.76
+le-cap-d'agde;4592;43.32;3.56
+la-rochelle;3904;46.16;-1.15
+amiens;2003;49.89;2.3
+pau;2013;43.3;-0.37
+clermont-ferrand;2107;45.78;3.08
+limoges;1488;45.83;1.25
+brest;1688;48.39;-4.49
+besançon;2223;47.24;6.02
+troyes;1589;48.3;4.08
+metz;2325;49.12;6.18
+nancy;2467;48.68;6.2
+tours ;2667;47.39;0.68
+bourges ;1408;47.08;2.4
+auxerre;1382;47.8;3.57
+caen;2658;49.19;-0.36
+boulogne-billancourt;11316;48.84;2.24
+nanterre;5984;48.89;2.21
+saint-denis;1525;48.94;2.35
+asnières-sur-seine;8270;48.92;2.28
+aulnay-sous-bois;3139;48.95;2.52
+champigny-sur-marne;3735;48.8;2.52
+courbevoie;7611;48.89;2.25
+créteil;4073;48.79;2.46
+la courneuve;2779;48.93;2.38
+reims;2583;49.25;4.03
