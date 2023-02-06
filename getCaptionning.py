@@ -66,7 +66,7 @@ def prepareTasksLists(serieFull, nTests, batchSize, model, vis_processors, devic
 def main():
     start = time.time()
     print("Starting...")
-    prepareTasksLists(df['images'], 15000, 50, model, vis_processors,device)
+    prepareTasksLists(df['images'], -1, 50, model, vis_processors,device)
     end = time.time()
     print("Total tasks duration : ", (end - start), "seconds")
 
