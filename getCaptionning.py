@@ -17,7 +17,7 @@ model, vis_processors, _ = load_model_and_preprocess(
     name="blip_caption", model_type="base_coco", is_eval=True, device=device
 )
 vis_processors.keys()
-
+print(f"Device : {device}")
 def get_caption(image, model, vis_processors, device):
     return model.generate({
           "image":  vis_processors["eval"](Image.fromarray(image)).unsqueeze(0).to(device)
@@ -30,27 +30,31 @@ def imageSplitter(lazyimage, model, vis_processors,device) :
 
 
 def applyToSeries(nThThread, series, model, vis_processors, device) : 
-  print(f"{nThThread}th threads - Apply To Series, from {series.index[0]} to {series.index[-1]}")
+  start = time.time()
   series.apply(lambda x:imageSplitter(x, model, vis_processors, device)).to_csv(
       f"images_captionning_results/from_{series.index[0]}_to_{series.index[-1]}.csv", index_label="index" )
-  print(f"Finished {nThThread}th threads.")
+  print(f"Finished {nThThread}-th thread in {start - time.time()} seconds.")
     
 
 
 def prepareTasksLists(serieFull, nTests, batchSize, model, vis_processors, device) : 
     n = serieFull.shape[0] if nTests == -1 else nTests
     serieWork = serieFull.iloc[:n]
-
+    batchThreadSize = 8
     threads=[]
     for batch in range(n//batchSize):
         threads += [
             Thread(target = applyToSeries, args = (batch, serieWork.iloc[batch*batchSize : (batch+1)*batchSize], model, vis_processors, device))
         ]
-        if batch %3 ==0 and batch !=0:
+        if batch %batchThreadSize ==0 and batch !=0:
+            start = time.time()
+            print(f"Starting batch of thread [{batch-batchThreadSize}-{batch}]/{n//batchSize}.")
             for thread in threads:
                 thread.start()
+            print(f"Waiting for batch [{batch-batchThreadSize}-{batch}]/{n//batchSize} to finish...")
             for thread in threads:
                 thread.join()
+            print(f"Batch [{batch-batchThreadSize}-{batch}]/{n//batchSize} finished in {start - time.time()} seconds !")
             threads=[]
 
     if n%batchSize != 0 :
@@ -58,15 +62,13 @@ def prepareTasksLists(serieFull, nTests, batchSize, model, vis_processors, devic
         last_thread.start()
         last_thread.join()
 
-#Si fonctionnel éxécuter asyncio.gather sur le retour de prepareTasksLists(df['images'], -1, 370, model, vis_processors)
 
 def main():
     start = time.time()
     print("Starting...")
-    prepareTasksLists(df['images'], -1, 30, model, vis_processors,device)
+    prepareTasksLists(df['images'], 15000, 50, model, vis_processors,device)
     end = time.time()
-    print((end - start), "seconds")
-    # await asyncio.gather(*prepareTasksLists(df['images'], -1, 370, model, vis_processors,device))
+    print("Total tasks duration : ", (end - start), "seconds")
 
 
 main()
