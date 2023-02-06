@@ -11,9 +11,6 @@ import time
 
 df=DataGetter()
 df=df.getData('train')
-
-# set device to cpu 
-# device = torch.device("cpu")
 device = torch.device("cuda")
 
 model, vis_processors, _ = load_model_and_preprocess(
@@ -25,6 +22,7 @@ def get_caption(image, model, vis_processors, device):
     return model.generate({
           "image":  vis_processors["eval"](Image.fromarray(image)).unsqueeze(0).to(device)
           }, use_nucleus_sampling=True)
+
 
 
 def imageSplitter(lazyimage, model, vis_processors,device) :
@@ -65,10 +63,10 @@ def prepareTasksLists(serieFull, nTests, batchSize, model, vis_processors, devic
 def main():
     start = time.time()
     print("Starting...")
-    nRows = 370
-    prepareTasksLists(df['images'], nRows, int(nRows/10), model, vis_processors,device)
+    nRows = 100
+    prepareTasksLists(df['images'], nRows, int(nRows/37), model, vis_processors,device)
     end = time.time()
-    print((end - start)/60,"minutes for ", nRows, "rows")
+    print((end - start), "seconds/row")
     # await asyncio.gather(*prepareTasksLists(df['images'], -1, 370, model, vis_processors,device))
 
 
