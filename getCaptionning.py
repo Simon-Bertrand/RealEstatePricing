@@ -33,7 +33,7 @@ def applyToSeries(nThThread, series, model, vis_processors, device) :
   start = time.time()
   series.apply(lambda x:imageSplitter(x, model, vis_processors, device)).to_csv(
       f"images_captionning_results/from_{series.index[0]}_to_{series.index[-1]}.csv", index_label="index" )
-  print(f"Finished {nThThread}-th thread in {start - time.time()} seconds.")
+  print(f"Finished {nThThread}-th thread in {time.time() - start} seconds.")
     
 
 
@@ -54,7 +54,7 @@ def prepareTasksLists(serieFull, nTests, batchSize, model, vis_processors, devic
             print(f"Waiting for batch [{batch-batchThreadSize}-{batch}]/{n//batchSize} to finish...")
             for thread in threads:
                 thread.join()
-            print(f"Batch [{batch-batchThreadSize}-{batch}]/{n//batchSize} finished in {start - time.time()} seconds !")
+            print(f"Batch [{batch-batchThreadSize}-{batch}]/{n//batchSize} finished in {time.time() -start } seconds !")
             threads=[]
 
     if n%batchSize != 0 :
