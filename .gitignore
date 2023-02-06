@@ -3,3 +3,7 @@
 **/__pycache__/
 **/.vs/
 /yolov7/*
+/.vscode/
+/.idea/
+/gdrivedl/
+/preprocessing/images_captionning_results/*
