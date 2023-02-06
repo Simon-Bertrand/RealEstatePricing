@@ -14,7 +14,7 @@ df=df.getData('train')
 device = torch.device("cuda")
 
 model, vis_processors, _ = load_model_and_preprocess(
-    name="blip_caption", model_type="base_coco", is_eval=True, device=device
+    name="blip_caption", model_type="large_coco", is_eval=True, device=device
 )
 vis_processors.keys()
 
