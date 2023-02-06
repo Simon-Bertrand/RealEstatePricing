@@ -2,3 +2,6 @@
 /.ipynb_checkpoints/
 */__pycache__/
 /yolov7/*
+
+
+/images_captionning_results/*
