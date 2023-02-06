@@ -2,3 +2,7 @@
 /.ipynb_checkpoints/
 */__pycache__/
 /yolov7/*
+/.vscode/
+/.idea/
+/gdrivedl/
+/preprocessing/images_captionning_results/*
