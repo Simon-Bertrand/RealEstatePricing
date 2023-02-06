@@ -4,20 +4,20 @@ import numpy as np, pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 class Plot:
-    def showDistribPlot(pdData,column,c='property_type',**args):
-        fig = px.scatter(pdData, x=np.arange(0,len(pdData.index),1), y=column,title = column,color = c,**args)
+    def showDistribPlot(df,column,c='property_type',**args):
+        fig = px.scatter(df, x=np.arange(0,len(df.index),1), y=column,title = column,color = c,**args)
         fig.show()
 
-    def histogram(pdData,column,nb=100,**args):
-        if pdData[column].dtype == 'O':
-            fig = px.histogram(pdData, x=column,nbins = nb,title='Histogram of '+column,color=column,**args)
+    def histogram(df,column,nb=100,**args):
+        if df[column].dtype == 'O':
+            fig = px.histogram(df, x=column,nbins = nb,title='Histogram of '+column,color=column,**args)
         else:
-            fig = px.histogram(pdData, x=column,nbins = nb,title='Histogram of '+column,**args)
+            fig = px.histogram(df, x=column,nbins = nb,title='Histogram of '+column,**args)
         fig.update_layout(bargap=0.2)
         fig.show()
 
-    def corr_matrix(pdData):
-        df_corr = pdData.corr()
+    def corrMatrix(df):
+        df_corr = df.corr()
         fig = go.Figure()
         fig.add_trace(go.Heatmap(x = df_corr.columns,y = df_corr.index,z = np.array(df_corr),text=df_corr.values,texttemplate='%{text:.2f}'))
         fig.show()
