@@ -2,13 +2,5 @@ pandas
 numpy
 scikit-image
 notebook
-torch==1.11.0a0+b6df043
-transformers==4.14.1
-timm==0.4.9
-decord
-ftfy
-oss2
-opencv-python
-more_itertools
 plotly
 
