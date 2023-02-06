@@ -1,4 +1,9 @@
 /data/*
 /.ipynb_checkpoints/
-*/__pycache__/
+**/__pycache__/
+**/.vs/
 /yolov7/*
+/.vscode/
+/.idea/
+/gdrivedl/
+/preprocessing/images_captionning_results/*
