@@ -7,3 +7,4 @@
 /.idea/
 /gdrivedl/
 /preprocessing/images_captionning_results/*
+/captions.csv

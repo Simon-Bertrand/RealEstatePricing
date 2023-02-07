@@ -40,9 +40,9 @@ def applyToSeries(nThThread, series, model, vis_processors, device) :
 def prepareTasksLists(serieFull, nTests, batchSize, model, vis_processors, device) : 
     n = serieFull.shape[0] if nTests == -1 else nTests
     serieWork = serieFull.iloc[:n]
-    batchThreadSize = 8
+    batchThreadSize = 2
     threads=[]
-    for batch in range(n//batchSize):
+    for batch in range(n//batchSize+1):
         threads += [
             Thread(target = applyToSeries, args = (batch, serieWork.iloc[batch*batchSize : (batch+1)*batchSize], model, vis_processors, device))
         ]
@@ -66,7 +66,7 @@ def prepareTasksLists(serieFull, nTests, batchSize, model, vis_processors, devic
 def main():
     start = time.time()
     print("Starting...")
-    prepareTasksLists(df['images'], -1, 50, model, vis_processors,device)
+    prepareTasksLists(df['images'], 100, 10, model, vis_processors,device)
     end = time.time()
     print("Total tasks duration : ", (end - start), "seconds")
 
