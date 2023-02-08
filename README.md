@@ -312,7 +312,8 @@ According to the found metric values and the graphical analysis, we can conclude
 What we could also consider doing in the future is to train our image captioning model ourselves on well-chosen and well-labeled data in order to have captions that describe what is in the images in a precise manner.
 
 **Annex**
-![Aspose Words 3726ac09-83ec-4107-907a-dcb559bcd09d 017](https://user-images.githubusercontent.com/84455908/217677024-e9fdb546-5215-4b20-b69f-777775040832.jpeg)
 
+
+![Aspose Words 3726ac09-83ec-4107-907a-dcb559bcd09d 017](https://user-images.githubusercontent.com/84455908/217677024-e9fdb546-5215-4b20-b69f-777775040832.jpeg)
 
 (1)
