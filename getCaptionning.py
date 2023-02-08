@@ -1,4 +1,4 @@
-import torch, sys, torchvision
+import torch, sys, os
 from PIL import Image
 from dataloader.get import DataGetter
 from threading import Thread
@@ -31,31 +31,36 @@ def imageSplitter(lazyimage, model, vis_processors,device) :
 
 def applyToSeries(nThThread, series, model, vis_processors, device) : 
   start = time.time()
-  series.apply(lambda x:imageSplitter(x, model, vis_processors, device)).to_csv(
-      f"images_captionning_results/from_{series.index[0]}_to_{series.index[-1]}.csv", index_label="index" )
+  if not os.path.exists(f"images_captionning_results/from_{series.index[0]}_to_{series.index[-1]}.csv"):
+    series.apply(lambda x:imageSplitter(x, model, vis_processors, device)).to_csv(
+        f"images_captionning_results/from_{series.index[0]}_to_{series.index[-1]}.csv", index_label="index" )
   print(f"Finished {nThThread}-th thread in {time.time() - start} seconds.")
     
-
+def executeThreads(threads, batch, batchThreadSize, n, batchSize):
+    start = time.time()
+    print(f"Starting batch of thread [{batch-batchThreadSize}-{batch}]/{n//batchSize}.")
+    for thread in threads:
+        thread.start()
+    print(f"Waiting for batch [{batch-batchThreadSize}-{batch}]/{n//batchSize} to finish...")
+    for thread in threads:
+        thread.join()
+    print(f"Batch [{batch-batchThreadSize}-{batch}]/{n//batchSize} finished in {time.time() -start } seconds !")
+    threads=[]
 
 def prepareTasksLists(serieFull, nTests, batchSize, model, vis_processors, device) : 
     n = serieFull.shape[0] if nTests == -1 else nTests
     serieWork = serieFull.iloc[:n]
     batchThreadSize = 2
     threads=[]
-    for batch in range(n//batchSize+1):
+    for batch in range(n//batchSize):
         threads += [
             Thread(target = applyToSeries, args = (batch, serieWork.iloc[batch*batchSize : (batch+1)*batchSize], model, vis_processors, device))
         ]
         if batch %batchThreadSize ==0 and batch !=0:
-            start = time.time()
-            print(f"Starting batch of thread [{batch-batchThreadSize}-{batch}]/{n//batchSize}.")
-            for thread in threads:
-                thread.start()
-            print(f"Waiting for batch [{batch-batchThreadSize}-{batch}]/{n//batchSize} to finish...")
-            for thread in threads:
-                thread.join()
-            print(f"Batch [{batch-batchThreadSize}-{batch}]/{n//batchSize} finished in {time.time() -start } seconds !")
-            threads=[]
+            executeThreads(threads, batch, batchThreadSize, n, batchSize)
+    
+    if len(threads) != 0 :
+        executeThreads(threads, batch, batchThreadSize, n, batchSize)
 
     if n%batchSize != 0 :
         last_thread = Thread(target = applyToSeries, args=(n//batchSize, serieWork.iloc[(n//batchSize)*batchSize:], model, vis_processors, device))
@@ -66,9 +71,8 @@ def prepareTasksLists(serieFull, nTests, batchSize, model, vis_processors, devic
 def main():
     start = time.time()
     print("Starting...")
-    prepareTasksLists(df['images'], 100, 10, model, vis_processors,device)
+    prepareTasksLists(df['images'], -1, 50, model, vis_processors,device)
     end = time.time()
     print("Total tasks duration : ", (end - start), "seconds")
-
 
 main()

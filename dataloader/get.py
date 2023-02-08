@@ -31,6 +31,11 @@ class DataGetter():
             (idx, data[(data.index.values != "images")&(data.index.values != "price")], data.images.load(), data.price)
             for idx, data in self.getData(test_or_train).iterrows()
         )
+    
+    def getTrainDataWithCaptions(self):
+        return self.getData("train").join(
+            pd.read_csv("preprocessing/data_captions.csv").set_index("id_annonce"),
+            how="inner").drop(columns="images")
 
 
 class LazyImages():
