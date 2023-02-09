@@ -1,5 +1,11 @@
 # challengedata.ens.fr - Real Estate Price Prediction, Télécom Physique Strasbourg, France
 
+
+[![Author](https://img.shields.io/badge/author-@Simon-Bertrand-blue)](https://github.com/Simon-Bertrand)
+[![Author](https://img.shields.io/badge/author-@AymaneElmahi-blue)](https://github.com/AymaneElmahi)
+[![Author](https://img.shields.io/badge/author-@rchoukri-blue)](https://github.com/rchoukri)
+[![Author](https://img.shields.io/badge/author-@Leoninho2-blue)](https://github.com/Leoninho2)
+
 ![Aspose Words 3726ac09-83ec-4107-907a-dcb559bcd09d 001](https://user-images.githubusercontent.com/84455908/217676529-42270ebf-5313-49b9-98ac-cfd145a75036.png)
 
 
